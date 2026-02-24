@@ -1,0 +1,11 @@
+{
+	"id": "muse-weaver-ai-bridge",
+	"name": "Muse Weaver AI Bridge",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "Shared AI connection bridge for Muse Weaver plugin series. Supports OpenAI, Anthropic, Google Gemini, and Ollama.",
+	"author": "satoshikokubo",
+	"authorUrl": "https://github.com/satoshikokubo",
+	"fundingUrl": "https://buymeacoffee.com/kokubox",
+	"isDesktopOnly": false
+}

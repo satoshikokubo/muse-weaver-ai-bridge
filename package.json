@@ -1,0 +1,31 @@
+{
+  "name": "muse-weaver-ai-bridge",
+  "version": "1.0.0",
+  "description": "Shared AI connection bridge for Muse Weaver plugin series (OpenAI / Anthropic / Gemini / Ollama)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "node esbuild.config.mjs production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satoshikokubo/muse-weaver-ai-bridge.git"
+  },
+  "keywords": [],
+  "author": "satoshikokubo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/satoshikokubo/muse-weaver-ai-bridge/issues"
+  },
+  "homepage": "https://github.com/satoshikokubo/muse-weaver-ai-bridge#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.3.0",
+    "builtin-modules": "^5.0.0",
+    "esbuild": "^0.27.3",
+    "eslint": "^10.0.1",
+    "obsidian": "^1.12.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.0"
+  }
+}
