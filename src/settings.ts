@@ -17,7 +17,7 @@ export class MwabSettingTab extends PluginSettingTab {
 		const { containerEl } = this;
 		containerEl.empty();
 
-		containerEl.createEl("h2", { text: t.pluginTitle });
+		new Setting(containerEl).setName(t.pluginTitle).setHeading();
 		containerEl.createEl("p", {
 			text: t.pluginSubtitle,
 			cls: "setting-item-description",
@@ -77,8 +77,8 @@ export class MwabSettingTab extends PluginSettingTab {
 						})
 				);
 			// Obscure the input
-			const apiInput = containerEl.querySelector(".setting-item:last-child input") as HTMLInputElement;
-			if (apiInput) apiInput.type = "password";
+			const apiInput = containerEl.querySelector(".setting-item:last-child input");
+			if (apiInput instanceof HTMLInputElement) apiInput.type = "password";
 		}
 
 		// ---- Ollama URL (before model selector, since URL affects model list) ----
@@ -102,7 +102,7 @@ export class MwabSettingTab extends PluginSettingTab {
 			const modelContainer = containerEl.createDiv();
 			const loadingEl = modelContainer.createDiv({ cls: "setting-item-description" });
 			loadingEl.setText(t.ollamaFetchingModels);
-			this.renderOllamaModelSelector(modelContainer, s).then(() => {
+			void this.renderOllamaModelSelector(modelContainer, s).then(() => {
 				loadingEl.remove();
 			});
 		} else {
@@ -123,7 +123,7 @@ export class MwabSettingTab extends PluginSettingTab {
 		}
 
 		// ---- Connection Test ----
-		containerEl.createEl("h3", { text: t.testHeading });
+		new Setting(containerEl).setName(t.testHeading).setHeading();
 
 		const testResultEl = containerEl.createDiv({ cls: "setting-item-description" });
 		testResultEl.style.marginBottom = "8px";
@@ -184,7 +184,7 @@ export class MwabSettingTab extends PluginSettingTab {
 
 	private renderPersonaSection(containerEl: HTMLElement): void {
 		const s = this.plugin.settings;
-		containerEl.createEl("h3", { text: t.guideHeading });
+		new Setting(containerEl).setName(t.guideHeading).setHeading();
 
 		const presetIds = getPresetIds();
 		const currentId = s.persona.selected;
@@ -206,7 +206,7 @@ export class MwabSettingTab extends PluginSettingTab {
 				if (!currentId || (!isCustom && !presetIds.includes(currentId))) {
 					s.persona.selected = "default";
 					dd.setValue("default");
-					this.plugin.saveSettings();
+					void this.plugin.saveSettings();
 				}
 
 				dd.onChange(async (v) => {
@@ -312,7 +312,7 @@ export class MwabSettingTab extends PluginSettingTab {
 			if (currentModel) {
 				this.ensureProvider("ollama");
 				s.providers["ollama"].model = "";
-				this.plugin.saveSettings();
+				void this.plugin.saveSettings();
 			}
 
 			if (lang === "ja") {
@@ -356,7 +356,7 @@ export class MwabSettingTab extends PluginSettingTab {
 			if (effectiveModel !== currentModel) {
 				this.ensureProvider("ollama");
 				s.providers["ollama"].model = effectiveModel;
-				this.plugin.saveSettings();
+				void this.plugin.saveSettings();
 			}
 
 			dd.onChange(async (v) => {
@@ -395,7 +395,7 @@ export class MwabSettingTab extends PluginSettingTab {
 		copyBtn.style.background = "none";
 		copyBtn.style.padding = "2px 4px";
 		copyBtn.addEventListener("click", () => {
-			navigator.clipboard.writeText(t.ollamaRecommendCmd);
+			void navigator.clipboard.writeText(t.ollamaRecommendCmd);
 			new Notice(t.ollamaCopied);
 		});
 	}
